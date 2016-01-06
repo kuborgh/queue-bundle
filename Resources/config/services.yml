@@ -1,0 +1,22 @@
+parameters:
+    kuborgh_queue.model.class: Kuborgh\Bundle\QueueBundle\Model\QueueModel
+    kuborgh_queue.database.class: Kuborgh\Bundle\QueueBundle\Database\QueueDatabase
+
+services:
+    kuborgh_queue.model:
+        class: %kuborgh_queue.model.class%
+        calls:
+            - [ setDoctrineRegistry, [@doctrine]]
+            - [ setConcurrency, [%kuborgh_queue.concurrency%]]
+            - [ setConsolePath, [%kuborgh_queue.console.path%]]
+            - [ setLogger, [@logger]]
+        tags:
+            - { name: monolog.logger, channel: queue }
+
+    kuborgh_queue.database:
+        class: %kuborgh_queue.database.class%
+        calls:
+            - [ setParameter, ['database_host','%database_host%']]
+            - [ setParameter, ['database_name','%database_name%']]
+            - [ setParameter, ['database_user','%database_user%']]
+            - [ setParameter, ['database_password','%database_password%']]

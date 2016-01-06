@@ -1,0 +1,8 @@
+parameters:
+    # Maximum number of concurrent processes
+    kuborgh_queue.concurrency: 1
+
+    # Automatically remove sucessfull finished jobs from queue after some time?
+    kuborgh_queue.auto_cleanup: true
+
+    kuborgh_queue.console.path: %kernel.root_dir%/console
