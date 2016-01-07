@@ -40,7 +40,7 @@ class ClearCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Standard garbage collection
-        $this->garbageCollect($output);
+        $this->garbageCollect();
 
         if (!$input->getOption(self::OPT_FORCE)) {
             $output->writeln(sprintf('<error>Parameter --%s not set</error>', self::OPT_FORCE));
@@ -53,5 +53,7 @@ class ClearCommand extends AbstractCommand
         sleep(5);
         $num = $this->getQueueModel()->clearQueue();
         $output->writeln(sprintf('Cleared <info>%d</info> entries', $num));
+
+        return 0;
     }
 }

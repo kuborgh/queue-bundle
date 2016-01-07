@@ -213,7 +213,7 @@ class RunnerCommand extends AbstractCommand
         $jobId = $job->getId();
 
         // Prepare command to run
-        $consolePath = $this->getContainer()->getParameter('kuborgh_queue.console.path');
+        $consolePath = $this->getContainer()->getParameter('kuborgh_queue.console_path');
         $cmd = sprintf('php %s queue:run %d', $consolePath, $jobId);
 
         $logger->debug(sprintf('Queue Runner trying to start %s', $cmd));

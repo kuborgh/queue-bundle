@@ -8,7 +8,6 @@
 
 namespace Kuborgh\QueueBundle\Command;
 
-use Kuborgh\QueueBundle\Model\QueueModel;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -44,7 +43,7 @@ class AddCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Standard garbage collection
-        $this->garbageCollect($output);
+        $this->garbageCollect();
 
         // Get the command
         $command = $input->getArgument(self::ARG_CMD);

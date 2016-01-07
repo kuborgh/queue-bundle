@@ -40,7 +40,7 @@ class RemoveCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Standard garbage collection
-        $this->garbageCollect($output);
+        $this->garbageCollect();
 
         // Get the command
         $jobId = $input->getArgument(self::ARG_ID);

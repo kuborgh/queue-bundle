@@ -24,11 +24,17 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('kuborgh_queue');
+        $rootNode = $treeBuilder->root('kuborgh_queue');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('kuborgh_queue')
+                    ->children()
+                        ->integerNode('concurrency')->defaultValue(1)->end()
+                        ->booleanNode('auto_cleanup')->defaultTrue()->end()
+                        ->scalarNode('console_path')->defaultValue('%kernel.root_dir%/console')->end()
+                    ->end()
+            ->end();
 
         return $treeBuilder;
     }

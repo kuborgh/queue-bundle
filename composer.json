@@ -1,27 +1,33 @@
 {
-    "name": "kuborgh/queue-bundle",
-    "type": "symfony-bundle",
-    "description": "Implements a queue for asynchronous processing of symfony command",
-    "keywords": ["library","command","queue","async"],
-    "homepage": "https://github.com/kuborgh/queue-bundle",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Hannes Giesenow",
-            "email": "hgiesenow@kuborgh.de"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.2",
-		"symfony/console": "*",
-		"symfony/process": "*"
-    },
-    "require-dev": {
-        "symfony/console": "*"
-    },
-    "autoload": {
-        "psr-0": { "Kuborgh\\QueueBundle": "" }
-    },
-    "minimum-stability": "dev",
-    "target-dir": "Kuborgh/QueueBundle"
+  "name": "kuborgh/queue-bundle",
+  "type": "symfony-bundle",
+  "description": "Implements a queue for asynchronous processing of symfony command",
+  "keywords": [
+    "library",
+    "command",
+    "queue",
+    "async"
+  ],
+  "homepage": "https://github.com/kuborgh/queue-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hannes Giesenow",
+      "email": "hgiesenow@kuborgh.de"
+    }
+  ],
+  "require": {
+    "symfony/framework-bundle": "~2.3",
+    "symfony/console": "~2.3",
+    "symfony/process": "~2.3",
+    "doctrine/orm": "~2.4",
+    "doctrine/doctrine-bundle": "~1.2",
+    "monolog/monolog": "~1.10"
+  },
+  "autoload": {
+    "psr-0": {
+      "Kuborgh\\QueueBundle": ""
+    }
+  },
+  "target-dir": "Kuborgh/QueueBundle"
 }

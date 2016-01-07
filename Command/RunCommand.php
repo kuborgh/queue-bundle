@@ -70,7 +70,7 @@ class RunCommand extends AbstractCommand
         $output->writeln('Marked job running');
 
         // Prepare command to run
-        $consolePath = $this->getContainer()->getParameter('kuborgh_queue.console.path');
+        $consolePath = $this->getContainer()->getParameter('kuborgh_queue.console_path');
         $cmd = sprintf('php %s %s', $consolePath, $jobCmd);
 
         $process = new Process($cmd);

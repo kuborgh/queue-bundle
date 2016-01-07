@@ -37,7 +37,7 @@ class ProcessCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Standard garbage collection
-        $this->garbageCollect($output);
+        $this->garbageCollect();
 
         $model = $this->getQueueModel();
 
