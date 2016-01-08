@@ -16,7 +16,7 @@ services:
     kuborgh_queue.database:
         class: %kuborgh_queue.database.class%
         calls:
-            - [ setParameter, ['database_host','%database_host%']]
-            - [ setParameter, ['database_name','%database_name%']]
-            - [ setParameter, ['database_user','%database_user%']]
-            - [ setParameter, ['database_password','%database_password%']]
+            - [ setParameter, ['database_host','%kuborgh_queue.database.host%']]
+            - [ setParameter, ['database_name','%kuborgh_queue.database.name%']]
+            - [ setParameter, ['database_user','%kuborgh_queue.database.user%']]
+            - [ setParameter, ['database_password','%kuborgh_queue.database.password%']]

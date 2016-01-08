@@ -28,11 +28,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('kuborgh_queue')
+                ->integerNode('concurrency')->defaultValue(1)->end()
+                ->booleanNode('auto_cleanup')->defaultTrue()->end()
+                ->scalarNode('console_path')->end()
+                ->arrayNode('database')
                     ->children()
-                        ->integerNode('concurrency')->defaultValue(1)->end()
-                        ->booleanNode('auto_cleanup')->defaultTrue()->end()
-                        ->scalarNode('console_path')->defaultValue('%kernel.root_dir%/console')->end()
+                        ->scalarNode('host')->end()
+                        ->scalarNode('name')->end()
+                        ->scalarNode('user')->end()
+                        ->scalarNode('pass')->end()
                     ->end()
             ->end();
 
