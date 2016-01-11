@@ -58,7 +58,7 @@ class QueueDatabase
         $stmt = $this->getPdo()->prepare($query);
         $stmt->bindValue(':status', QueueModel::STATUS_WAITING, \PDO::PARAM_STR);
         $stmt->execute();
-        $entity = $stmt->fetchObject('Kuborgh\Bundle\QueueBundle\Entity\JobEntity');
+        $entity = $stmt->fetchObject('Kuborgh\QueueBundle\Entity\JobEntity');
 
         return $entity;
     }
@@ -101,7 +101,7 @@ class QueueDatabase
         $stmt->execute();
 
         // Fetch/convert objects
-        while (false !== ($entity = $stmt->fetchObject('Kuborgh\Bundle\QueueBundle\Entity\JobEntity'))) {
+        while (false !== ($entity = $stmt->fetchObject('Kuborgh\QueueBundle\Entity\JobEntity'))) {
             $entites[] = $entity;
         }
 
@@ -123,7 +123,7 @@ class QueueDatabase
         $stmt = $this->getPdo()->prepare($query);
         $stmt->bindValue(':id', $jobId);
         $stmt->execute();
-        $entity = $stmt->fetchObject('Kuborgh\Bundle\QueueBundle\Entity\JobEntity');
+        $entity = $stmt->fetchObject('Kuborgh\QueueBundle\Entity\JobEntity');
         if ($entity === false) {
             $error = $stmt->errorInfo();
             throw new \Exception('Error fetching job: '.$error[2]);
@@ -199,7 +199,7 @@ class QueueDatabase
     {
         $additional = array(
             'endTime' => $this->getCurrentTime(),
-            'pid'     => null,
+            'pid'     => 'null',
         );
         $this->markJobStatus($jobId, QueueModel::STATUS_FAILED, $additional);
     }
