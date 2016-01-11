@@ -54,6 +54,19 @@ class AppKernel extends Kernel
 }
 ```
 
+### Step 3: Configure cron
+
+The cronjob's purpose is to ensure, that the queue-runner is always running. This can be useful for server restarts, when the queue runner gets killed or when it is terminated due to errors. The cron interval is the maximum time, the queue may not run in worst-case, so 1h should be absolutely fine in most cases.
+```crontab
+0 * * * * cd <your-installation>; php app/console queue:runner > /dev/null 2>&1
+```
+
+When you are interested in the output of the queue runner, you can redirect it into a file
+```crontab
+0 * * * * (cd <your-installation>; echo `date` START; php app/console queue:runner; echo `date` END) >> logs/queue-runner.log 2>&1
+```
+
+
 Configuration
 -------------
 
@@ -68,4 +81,13 @@ kuborgh_queue:
 
     # Path to console command to execute the jobs
     console_path: %kernel.root_dir%/console
+```
+
+Debugging / Monitoring
+----------------------
+
+To see, what the queue is doing at the moment, the best place to look is the database, or the log files.
+On the terminal the following command is most useful to see the current processes
+```bash
+$ ps uxf
 ```
