@@ -14,6 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Pick an entry from the queue and run
  * NOTE: RunnerCommand should be preferred, as it can process more than 1 entry per minute
+ *
+ * @deprecated do not use this command anymore!
  */
 class ProcessCommand extends AbstractCommand
 {
@@ -40,6 +42,7 @@ class ProcessCommand extends AbstractCommand
         $this->garbageCollect();
 
         $model = $this->getQueueModel();
+        $model->cleanupStalledJobs();
 
         // Check if processing slots are available
         $running = $model->getRunningJobs();
