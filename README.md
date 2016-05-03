@@ -91,3 +91,24 @@ On the terminal the following command is most useful to see the current processe
 ```bash
 $ ps uxf
 ```
+
+Logentries integration
+----------------------
+
+By using the the kuborgh/logentries-bundle, it is possible to send periodically stats of the queue to logentries. This 
+allows you to set an alert, when the queue is hanging, or identifiy long-running jobs
+ 
+1. Install and configure the kuborgh/logentries-bundle to have a logger service named `queue`.
+```yml
+kuborgh_logentries:
+    logger:
+        queue:
+            log_set: MyHost
+            log: Queue
+```
+
+2. Add a job to your crontab
+```cron
+# Report state to logentries.com
+*/5 * * * * php app/console queue:logentries > /dev/null 2>&1
+```

@@ -95,13 +95,19 @@ class QueueDatabase
         $entites = array();
 
         // Execute statement
-        $query = 'SELECT id FROM queue_jobs WHERE status = :status';
+        $query = 'SELECT * FROM queue_jobs WHERE status = :status';
         $stmt = $this->getPdo()->prepare($query);
         $stmt->bindValue(':status', QueueModel::STATUS_RUNNING, \PDO::PARAM_STR);
         $stmt->execute();
 
         // Fetch/convert objects
+        /** @var JobEntity $entity */
         while (false !== ($entity = $stmt->fetchObject('Kuborgh\QueueBundle\Entity\JobEntity'))) {
+            // Convert database time format to datetime
+            $time = $entity->getStartTime();
+            $timeObj = new \DateTime($time);
+            $entity->setStartTime($timeObj);
+            
             $entites[] = $entity;
         }
 

@@ -140,6 +140,28 @@ class QueueModel
     }
 
     /**
+     * Load job, when it's waiting or runnning
+     *
+     * @param string $command Job command
+     *
+     * @throws \Exception
+     * @return JobEntity
+     */
+    public function getJobByCommand($command)
+    {
+        $enMan = $this->getEntityManager();
+        $repo = $enMan->getRepository(self::ENTITY);
+
+        $job = $repo->findOneBy(array('command' => $command, 'status' => array(self::STATUS_WAITING, self::STATUS_RUNNING)));
+
+        if (!$job instanceof JobEntity) {
+            throw new \Exception(sprintf('No waiting job with command "%s" found', $command));
+        }
+
+        return $job;
+    }
+
+    /**
      * Size of the queue
      *
      * @return int
@@ -367,8 +389,7 @@ class QueueModel
 
         try {
             $process->setTimeout(null);
-            $process->start(function () {
-            });
+            $process->run();
         } catch (\Exception $e) {
             // @rfe log more info
             $msg = sprintf('Job %s (ID %d) failed with exception: %s', $job->getCommand(), $job->getId(), $e->getMessage());
