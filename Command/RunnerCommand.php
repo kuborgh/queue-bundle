@@ -257,7 +257,7 @@ class RunnerCommand extends AbstractCommand
         $mycwd = $this->getContainer()->getParameter('kernel.root_dir');
         foreach ($cmds as $cmd) {
             // Extract PID
-            if (!preg_match('/^(\d*) php (.*) /', $cmd, $match)) {
+            if (!preg_match('/^([\s\d]+) php (.*) /', $cmd, $match)) {
                 $this->getLogger()->error('Queue Runner running check - could not detect PID: '.$cmd);
 
                 return -1;
