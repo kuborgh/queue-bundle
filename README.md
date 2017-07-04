@@ -44,7 +44,7 @@ class AppKernel extends Kernel
         $bundles = array(
             // ...
 
-            new Kuborgh\QueueBundle\QueueBundle(),
+            new Kuborgh\QueueBundle\KuborghQueueBundle(),
         );
 
         // ...
